@@ -9,13 +9,13 @@ class App extends Component {
     requestApi.post('', {
       mod: '/user/login',
     }, {
-      pass: "123",
-      username: "gepeng",
+      pass: '123',
+      username: 'gepeng',
     })
-      .then(data => {
+      .then((data) => {
         console.log('data', data)
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('error', err)
       })
   }

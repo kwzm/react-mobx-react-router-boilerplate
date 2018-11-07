@@ -26,8 +26,8 @@ const get = (url, params = {}, headers = {}) => new Promise((resolve, reject) =>
   request.get(`${baseApiUrl}${url}`)
     .set(reqHeaders)
     .query(params)
-    .then((res) => successHander(res, resolve))
-    .catch((err) => errorHandler(err, reject))
+    .then(res => successHander(res, resolve))
+    .catch(err => errorHandler(err, reject))
 })
 
 const post = (url = '', params = {}, data = {}, headers = {}) => new Promise((resolve, reject) => {
@@ -40,8 +40,8 @@ const post = (url = '', params = {}, data = {}, headers = {}) => new Promise((re
     .set(reqHeaders)
     .query(params)
     .send(data)
-    .then((res) => successHander(res, resolve))
-    .catch((err) => errorHandler(err, reject))
+    .then(res => successHander(res, resolve))
+    .catch(err => errorHandler(err, reject))
 })
 
 const requestApi = {
