@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader'
-import requestApi from './utils/http'
+import requestApi from 'utils/http'
 import logo from './logo.svg';
 import styles from './App.module.less';
 
