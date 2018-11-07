@@ -1,12 +1,9 @@
+import 'react-app-polyfill/ie9'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import promise from 'es6-promise'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-
-// promise compatibility
-promise.polyfill()
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
