@@ -9,8 +9,8 @@ const config = {
       API_HOST: '',
       API_PATH: '/api',
       API_PORT: '80',
-    }
-  }
+    },
+  },
 }
 
 export default config

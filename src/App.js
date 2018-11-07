@@ -7,7 +7,7 @@ import styles from './App.module.less'
 class App extends Component {
   componentDidMount() {
     requestApi.post('', {
-      mod: '/user/login'
+      mod: '/user/login',
     }, {
       pass: "123",
       username: "gepeng",
