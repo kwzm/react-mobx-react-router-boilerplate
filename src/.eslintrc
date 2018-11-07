@@ -1,7 +1,31 @@
 {
-  "extends": "react-app",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": "airbnb",
   "rules": {
-    "semi": ["error", "never"],
-    "comma-dangle": ["error", "always-multiline"]
+    "semi": [0],
+    "react/jsx-one-expression-per-line": [0],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/require-default-props": [0],
+    "react/forbid-prop-types": [0],
+    "no-param-reassign": [0],
+    "react/no-danger": [0],
+    "no-debugger": [0],
+    "no-redeclare": [0],
+    "operator-linebreak": ["error", "before"],
+    "max-len": [0]
   }
 }
