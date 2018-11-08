@@ -1,5 +1,5 @@
+import config from 'config/config'
 import { getIsDev } from './common'
-import config from '../config'
 
 export const getBaseApiUrl = () => {
   const isDev = getIsDev()
