@@ -59,7 +59,7 @@ const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
 
 // common function to get style loaders
-const getStyleLoaders = (cssOptions, preProcessor) => {
+const getStyleLoaders = (cssOptions, preProcessor, options = {}) => {
   const loaders = [
     {
       loader: MiniCssExtractPlugin.loader,
@@ -99,6 +99,7 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
       loader: require.resolve(preProcessor),
       options: {
         sourceMap: shouldUseSourceMap,
+        ...options,
       },
     });
   }
@@ -414,7 +415,10 @@ module.exports = {
                 importLoaders: 2,
                 sourceMap: shouldUseSourceMap, 
               }, 
-              'less-loader'
+              'less-loader',
+              {
+                javascriptEnabled: true,
+              }
             ),
           },
           {
@@ -426,7 +430,10 @@ module.exports = {
                 modules: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
-              'less-loader'
+              'less-loader',
+              {
+                javascriptEnabled: true,
+              }
             ),
           },
           // "file" loader makes sure assets end up in the `build` folder.
