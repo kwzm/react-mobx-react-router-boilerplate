@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Layout, Menu, Icon } from 'antd'
+import { Layout } from 'antd'
+import { Switch } from 'react-router-dom'
+import Sidebar from 'components/Sidebar'
 import styles from './BasicLayout.module.less'
 
 const BasicLayout = (props) => {
@@ -9,7 +11,7 @@ const BasicLayout = (props) => {
     Content,
     Sider,
   } = Layout
-  const { routes, navData } = props
+  const { location, routes, navData } = props
 
   return (
     <Layout className={styles.layout}>
@@ -18,20 +20,15 @@ const BasicLayout = (props) => {
         collapsedWidth="0"
       >
         <div className={styles.logo} />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-          { navData.map(item => (
-            <Menu.Item key={item.id}>
-              <Icon type={item.icon} />
-              <span className="nav-text">{item.text}</span>
-            </Menu.Item>
-          )) }
-        </Menu>
+        <Sidebar location={location} navData={navData} />
       </Sider>
       <Layout>
         <Header className={styles.header} />
         <Content className={styles.content}>
           <div>
-            {routes}
+            <Switch>
+              {routes}
+            </Switch>
           </div>
         </Content>
       </Layout>
@@ -40,6 +37,7 @@ const BasicLayout = (props) => {
 }
 
 BasicLayout.propTypes = {
+  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
   navData: PropTypes.array.isRequired,
 }
