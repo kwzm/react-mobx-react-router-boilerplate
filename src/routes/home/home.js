@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from './logo.svg'
-import styles from './home.module.less'
+import styles from './home.module.less';
 
 const Home = () => {
   return (
