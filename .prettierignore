@@ -1,0 +1,8 @@
+build
+config
+node_modules
+public
+scripts
+**/*.md
+**/*.html
+package-lock.json
