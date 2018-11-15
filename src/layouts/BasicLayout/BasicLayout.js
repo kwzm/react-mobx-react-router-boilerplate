@@ -1,38 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Layout } from 'antd'
 import { Switch } from 'react-router-dom'
 import Sidebar from 'components/Sidebar'
+import Header from 'components/Header'
 import styles from './BasicLayout.module.less'
 
-const BasicLayout = (props) => {
-  const {
-    Header,
-    Content,
-    Sider,
-  } = Layout
+const BasicLayout = props => {
   const { location, routes, navData } = props
 
   return (
-    <Layout className={styles.layout}>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-      >
+    <div className={styles.layout}>
+      <nav className={styles.nav}>
         <div className={styles.logo} />
         <Sidebar location={location} navData={navData} />
-      </Sider>
-      <Layout>
+      </nav>
+      <section className={styles.contentWrap}>
         <Header className={styles.header} />
-        <Content className={styles.content}>
+        <article className={styles.content}>
           <div>
-            <Switch>
-              {routes}
-            </Switch>
+            <Switch>{routes}</Switch>
           </div>
-        </Content>
-      </Layout>
-    </Layout>
+        </article>
+      </section>
+    </div>
   )
 }
 
