@@ -14,8 +14,8 @@ export const getLoadableComponent = loader => {
 
 export const isIe9 = () => {
   if (
-    navigator.appName === 'Microsoft Internet Explorer' &&
-    navigator.appVersion.split(';')[1].replace(/[ ]/g, '') === 'MSIE9.0'
+    navigator.appName === 'Microsoft Internet Explorer'
+    && navigator.appVersion.split(';')[1].replace(/[ ]/g, '') === 'MSIE9.0'
   ) {
     return true
   }
