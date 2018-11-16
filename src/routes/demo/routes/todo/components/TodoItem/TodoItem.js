@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { observer, PropTypes as ObservablePropTypes, inject } from 'mobx-react'
 import { List, Checkbox, Icon } from 'antd'
@@ -16,7 +17,7 @@ class TodoItem extends React.Component {
     todo.toggle()
   }
 
-  handleClick = () => {
+  handleClose = () => {
     const { todo, removeTodo } = this.props
 
     removeTodo(todo)
@@ -26,12 +27,14 @@ class TodoItem extends React.Component {
     const { todo } = this.props
 
     return (
-      <List.Item actions={[<Icon type="close" onClick={this.handleClick} />]}>
+      <List.Item actions={[<Icon type="close" onClick={this.handleClose} />]}>
         <div className={styles.item}>
           <Checkbox checked={todo.isFinished} onChange={this.handleChange} />
-          <span className={classNames(styles.title, { [styles.finished]: todo.isFinished })}>
-            {todo.title}
-          </span>
+          <Link to={`/demo/todo/${todo.id}`}>
+            <span className={classNames(styles.title, { [styles.finished]: todo.isFinished })}>
+              {todo.title}
+            </span>
+          </Link>
         </div>
       </List.Item>
     )

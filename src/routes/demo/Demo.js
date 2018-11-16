@@ -1,15 +1,20 @@
 import React from 'react'
-import TodoHeader from './components/TodoHeader'
-import TodoList from './components/TodoList'
-import TodoFooter from './components/TodoFooter'
-import styles from './Demo.module.less'
+import { Route, Redirect } from 'react-router-dom'
+import { getLoadableComponent } from 'utils/common'
 
-const Demo = () => (
-  <div className={styles.demo}>
-    <TodoHeader />
-    <TodoList />
-    <TodoFooter />
-  </div>
-)
+const LoadedTodo = getLoadableComponent(() => import('./routes/todo'))
+const LoadedTodoDetail = getLoadableComponent(() => import('./routes/todoDetail'))
+
+const Demo = props => {
+  const {
+    match: { path },
+  } = props
+
+  return [
+    <Route path={path} exact render={() => <Redirect to="/demo/todo" />} key="root" />,
+    <Route path={`${path}/todo`} exact component={LoadedTodo} key="todo" />,
+    <Route path={`${path}/todo/:id`} exact component={LoadedTodoDetail} key="todoDetail" />,
+  ]
+}
 
 export default Demo
