@@ -97,7 +97,6 @@
       "package-lock.json"
     ]
   },
-  "proxy": "http://10.2.5.98",
   "browserslist": [
     ">0.2%",
     "not dead",
