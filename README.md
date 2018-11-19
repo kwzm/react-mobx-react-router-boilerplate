@@ -33,6 +33,54 @@ A simple boilerplate based on create-react-app but add mobx, react-router, style
 - Add isIe9 utility function
 - Add todo demo help you quick start
 
+## Stack
+- creat-react-app@2.1.1
+- react@16
+- mobx@4
+- react-router@4
+- ant-design@3
+
+## Directory structore
+```
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── .babelrc
+├── .editorconfig
+├── .eslintrc.json
+├── .stylelintrc.json
+├── .prettierrc.json
+├── .prettierignore
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── config (webpack config)
+├── scripts    
+└── src
+    ├── assets (global assets)
+    ├── components (global components)
+    ├── config (global config)
+    ├── layouts (global layouts)
+    ├── routes (first level routes)
+    │   ├── 404
+    │   ├── demo 
+    |   │   ├── routes (second level routes)
+    |   |   |   ├── todo
+    |   |   |   └── todoDetail 
+    |   │   ├── Demo.js
+    |   │   └── index.js
+    │   └── home
+    ├── stores (global stores)
+    ├── utils (global utils)
+    ├── App.js
+    ├── index.css
+    └── index.js
+```
+
 ## Browser support
   - IE9+
   - Modern browsers
