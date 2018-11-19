@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { observer, PropTypes as ObservablePropTypes, inject } from 'mobx-react'
-import { List, Checkbox, Icon } from 'antd'
+import { Checkbox, Icon } from 'antd'
 import styles from './TodoItem.module.less'
 
 @inject(({ demo }) => ({
@@ -27,16 +27,23 @@ class TodoItem extends React.Component {
     const { todo } = this.props
 
     return (
-      <List.Item actions={[<Icon type="close" onClick={this.handleClose} />]}>
-        <div className={styles.item}>
+      <li className={styles.item}>
+        <div className={styles.checkboxWrap}>
           <Checkbox checked={todo.isFinished} onChange={this.handleChange} />
-          <Link to={`/demo/todo/${todo.id}`}>
-            <span className={classNames(styles.title, { [styles.finished]: todo.isFinished })}>
-              {todo.title}
-            </span>
-          </Link>
         </div>
-      </List.Item>
+        <div className={styles.titleWrap}>
+          <div>
+            <Link to={`/demo/todo/${todo.id}`}>
+              <span className={classNames({ [styles.finished]: todo.isFinished })}>
+                {todo.title}
+              </span>
+            </Link>
+          </div>
+        </div>
+        <div className={styles.deleteWrap}>
+          <Icon type="close" onClick={this.handleClose} />
+        </div>
+      </li>
     )
   }
 }

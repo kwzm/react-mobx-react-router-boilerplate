@@ -24,7 +24,7 @@ class TodoFooter extends React.Component {
     const { left, filter } = this.props
 
     return (
-      <footer>
+      <footer className={styles.todoFooter}>
         <span className={styles.left}>{left} item(s) left</span>
         <Radio.Group value={filter} onChange={this.handleChange}>
           {actions.map(action => (

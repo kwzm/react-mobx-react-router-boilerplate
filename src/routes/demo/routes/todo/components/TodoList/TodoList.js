@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer, inject, PropTypes } from 'mobx-react'
-import { List } from 'antd'
 import TodoItem from '../TodoItem'
+import styles from './TodoList.module.less'
 
 @inject(({ demo }) => ({
   data: demo.filteredTodos,
@@ -11,7 +11,15 @@ class TodoList extends React.Component {
   render() {
     const { data } = this.props
 
-    return <List dataSource={data.toJS()} renderItem={item => <TodoItem todo={item} />} />
+    return (
+      <ul className={styles.todoList}>
+        {data.length > 0 ? (
+          data.map(item => <TodoItem key={item.id} todo={item} />)
+        ) : (
+          <div className={styles.noData}> no data </div>
+        )}
+      </ul>
+    )
   }
 }
 

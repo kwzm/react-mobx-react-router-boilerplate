@@ -1,14 +1,37 @@
 .item {
-  display: flex;
-  align-items: center;
+  display: table;
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #ccc;
+  line-height: 40px;
+}
+
+.checkboxWrap {
+  display: table-cell;
+  width: 30px;
+}
+
+.titleWrap {
+  display: table-cell;
+  text-align: left;
+
+  & > div {
+    width: 400px;
+    margin: 0 10px;
+    overflow: hidden;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.deleteWrap {
+  display: table-cell;
+  text-align: right;
+  cursor: pointer;
 }
 
 .finished {
   text-decoration: line-through;
   color: #ccc;
-}
-
-.title {
-  margin-left: 20px;
-  font-size: 20px;
 }
