@@ -38,7 +38,7 @@ A simple boilerplate based on create-react-app but add mobx, react-router, style
 - react@16
 - mobx@4
 - react-router@4
-- ant-design@3
+- ant-design@2
 
 ## Directory structore
 ```
