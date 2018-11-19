@@ -28,7 +28,7 @@ A simple boilerplate based on create-react-app but add mobx, react-router, style
 - Use antd import on demand
 - Add basic layout
 - Add exception component to handle 403, 404, 500 error(copy antd-pro)
-- Add reset css
+- Add [reset css](https://github.com/jgthms/minireset.css)
 - Drop console when build
 - Add isIe9 utility function
 - Add todo demo help you quick start
