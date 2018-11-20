@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { getLoadableComponent } from 'utils/common'
+import { getLoadableComponent } from '@/utils/common'
 
 const LoadedTodo = getLoadableComponent(() => import('./routes/todo'))
 const LoadedTodoDetail = getLoadableComponent(() => import('./routes/todoDetail'))

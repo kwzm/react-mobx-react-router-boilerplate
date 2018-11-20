@@ -1,19 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Loading from 'components/Loading'
+import Loading from '@/components/Loading'
 
-const LoadingInLoadable = ({
-  error,
-  timedOut,
-  pastDelay,
-  retry,
-}) => {
+const LoadingInLoadable = ({ error, timedOut, pastDelay, retry }) => {
   if (error) {
-    return <div>Error! <button type="button" onClick={retry}>Retry</button></div>
+    return (
+      <div>
+        Error!{' '}
+        <button type="button" onClick={retry}>
+          Retry
+        </button>
+      </div>
+    )
   }
 
   if (timedOut) {
-    return <div>Taking a long time... <button type="button" onClick={retry}>Retry</button></div>
+    return (
+      <div>
+        Taking a long time...{' '}
+        <button type="button" onClick={retry}>
+          Retry
+        </button>
+      </div>
+    )
   }
 
   if (pastDelay) {

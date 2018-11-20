@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Switch } from 'react-router-dom'
-import Sidebar from 'components/Sidebar'
-import Header from 'components/Header'
+import Sidebar from '@/components/Sidebar'
+import Header from '@/components/Header'
 import styles from './BasicLayout.module.less'
 
 const BasicLayout = props => {
