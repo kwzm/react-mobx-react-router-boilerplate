@@ -7,7 +7,9 @@ import navData from '@/config/nav.config'
 import { getLoadableComponent } from '@/utils/common'
 import stores from './stores'
 
-const LoadableBasicLayout = getLoadableComponent(() => import('@/layouts/BasicLayout'))
+const LoadableBasicLayout = getLoadableComponent(() =>
+  import(/* webpackChunkName: "basicLayout" */ '@/layouts/BasicLayout')
+)
 
 const App = () => {
   return (

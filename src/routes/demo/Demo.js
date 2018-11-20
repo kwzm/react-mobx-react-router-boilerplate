@@ -2,8 +2,12 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { getLoadableComponent } from '@/utils/common'
 
-const LoadedTodo = getLoadableComponent(() => import('./routes/todo'))
-const LoadedTodoDetail = getLoadableComponent(() => import('./routes/todoDetail'))
+const LoadedTodo = getLoadableComponent(() =>
+  import(/* webpackChunkName: "todo" */ './routes/todo')
+)
+const LoadedTodoDetail = getLoadableComponent(() =>
+  import(/* webpackChunkName: "todoDetail" */ './routes/todoDetail')
+)
 
 const Demo = props => {
   const {
