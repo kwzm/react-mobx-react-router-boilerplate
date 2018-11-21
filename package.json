@@ -100,7 +100,7 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
+    "not ie <= 8",
     "not op_mini all"
   ],
   "devDependencies": {
