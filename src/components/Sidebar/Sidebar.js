@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { inject, observer } from 'mobx-react'
 import { Menu, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 
 const { SubMenu } = Menu
 
+@inject(({ common }) => ({
+  collapsed: common.collapsed,
+}))
+@observer
 class Sidebar extends React.Component {
   constructor(props) {
     super(props)
@@ -84,6 +89,7 @@ class Sidebar extends React.Component {
     const {
       navData,
       location: { pathname },
+      collapsed,
     } = this.props
     const { openKeys } = this.state
 
@@ -91,6 +97,7 @@ class Sidebar extends React.Component {
       <Menu
         theme="dark"
         mode="inline"
+        inlineCollapsed={collapsed}
         selectedKeys={[pathname]}
         openKeys={openKeys}
         onOpenChange={this.handleOpenChange}
@@ -112,6 +119,10 @@ class Sidebar extends React.Component {
       </Menu>
     )
   }
+}
+
+Sidebar.wrappedComponent.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
 }
 
 Sidebar.propTypes = {
