@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import { inject, observer, PropTypes as ObservablePropTypes } from 'mobx-react'
 import { Table, Button } from 'antd'
 import FormModal from '../FormModal'
@@ -55,9 +56,12 @@ class List extends React.Component {
   }
 
   handleTableChange = pagination => {
-    const { filter, fetchProducts } = this.props
+    const { page, filter, fetchProducts } = this.props
+    const { current } = pagination
 
-    fetchProducts(filter, { page: pagination.current })
+    if (page !== current) {
+      fetchProducts(filter, { page: current })
+    }
   }
 
   getColumns = () => {
@@ -67,10 +71,12 @@ class List extends React.Component {
       {
         title: '名称',
         dataIndex: 'name',
+        sorter: (a, b) => a.name.length - b.name.length,
       },
       {
         title: '厂家',
         dataIndex: 'manufacturer',
+        sorter: (a, b) => a.manufacturer.length - b.manufacturer.length,
       },
       {
         title: '类别',
@@ -78,10 +84,25 @@ class List extends React.Component {
         render: val => {
           return categories.find(item => item.value === val).name
         },
+        sorter: (a, b) => Number(a.category) - Number(b.category),
       },
       {
         title: '生产日期',
         dataIndex: 'productionDate',
+        sorter: (a, b) => {
+          const dateA = a.productionDate
+          const dateB = b.productionDate
+
+          if (moment(dateA).isBefore(dateB)) {
+            return -1
+          }
+
+          if (moment(dateA).isSame(dateB)) {
+            return 0
+          }
+
+          return 1
+        },
       },
       {
         title: '操作',
