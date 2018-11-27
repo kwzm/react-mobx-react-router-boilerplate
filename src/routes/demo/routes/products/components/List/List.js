@@ -7,6 +7,9 @@ import styles from './List.module.less'
 
 @inject(({ products }) => ({
   data: products.list,
+  page: products.page,
+  total: products.total,
+  filter: products.filter,
   categories: products.categories,
   listLoading: products.listLoading,
   fetchProducts: products.fetchProducts,
@@ -49,6 +52,12 @@ class List extends React.Component {
 
   handleRemove = data => {
     this.props.removeProduct(data)
+  }
+
+  handleTableChange = pagination => {
+    const { filter, fetchProducts } = this.props
+
+    fetchProducts(filter, { page: pagination.current })
   }
 
   getColumns = () => {
@@ -94,7 +103,7 @@ class List extends React.Component {
   }
 
   render() {
-    const { data, listLoading } = this.props
+    const { data, listLoading, page, total } = this.props
     const { isOpenModal, currentProduct } = this.state
 
     return (
@@ -108,6 +117,11 @@ class List extends React.Component {
           loading={listLoading}
           columns={this.getColumns()}
           dataSource={data.toJS()}
+          pagination={{
+            current: page,
+            total,
+          }}
+          onChange={this.handleTableChange}
         />
         <FormModal data={currentProduct} visible={isOpenModal} onClose={this.handleCloseModel} />
       </div>
@@ -117,6 +131,9 @@ class List extends React.Component {
 
 List.wrappedComponent.propTypes = {
   data: ObservablePropTypes.observableArray.isRequired,
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  filter: ObservablePropTypes.observableObject.isRequired,
   categories: ObservablePropTypes.observableArray.isRequired,
   listLoading: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,

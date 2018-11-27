@@ -1,4 +1,5 @@
 import { observable, action, runInAction } from 'mobx'
+import queryString from 'query-string'
 import requestApi from '@/utils/http'
 
 class Products {
@@ -23,15 +24,27 @@ class Products {
     },
   ]
 
-  @action.bound fetchProducts(filter = {}) {
+  @observable page = 1
+
+  @observable total = 0
+
+  @observable filter = {}
+
+  @action.bound fetchProducts(filter = {}, pagination = { page: 1 }) {
+    const params = queryString.stringify({
+      filter: JSON.stringify(filter),
+      pagination: JSON.stringify(pagination),
+    })
+
+    this.filter = filter
     this.listLoading = true
     requestApi
-      .get('/products', {
-        ...filter,
-      })
-      .then(data => {
+      .get(`/products?${params}`)
+      .then(resp => {
         runInAction(() => {
-          this.list = data
+          this.list = resp.data
+          this.page = resp.page
+          this.total = resp.total
           this.listLoading = false
         })
       })
