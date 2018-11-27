@@ -1,8 +1,4 @@
-import { observable, action, configure } from 'mobx'
-
-configure({
-  enforceActions: 'observed',
-})
+import { observable, action } from 'mobx'
 
 class Common {
   @observable collapsed = false

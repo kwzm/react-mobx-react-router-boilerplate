@@ -1,8 +1,4 @@
-import { observable, action, computed, configure } from 'mobx'
-
-configure({
-  enforceActions: 'observed',
-})
+import { observable, action, computed } from 'mobx'
 
 class Todo {
   constructor(title) {

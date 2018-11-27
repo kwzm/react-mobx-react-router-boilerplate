@@ -5,6 +5,10 @@ export const getIsDev = () => {
   return process.env.NODE_ENV === 'development'
 }
 
+export const isMock = () => {
+  return process.env.REACT_APP_MOCK !== 'none'
+}
+
 export const getLoadableComponent = loader => {
   return Loadable({
     loader,

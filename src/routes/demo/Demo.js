@@ -8,6 +8,9 @@ const LoadedTodo = getLoadableComponent(() =>
 const LoadedTodoDetail = getLoadableComponent(() =>
   import(/* webpackChunkName: "todoDetail" */ './routes/todoDetail')
 )
+const LoadedProducts = getLoadableComponent(() =>
+  import(/* webpackChunkName: "products" */ './routes/products')
+)
 
 const Demo = props => {
   const {
@@ -18,6 +21,7 @@ const Demo = props => {
     <Route path={path} exact render={() => <Redirect to="/demo/todo" />} key="root" />,
     <Route path={`${path}/todo`} exact component={LoadedTodo} key="todo" />,
     <Route path={`${path}/todo/:id`} exact component={LoadedTodoDetail} key="todoDetail" />,
+    <Route path={`${path}/products`} exact component={LoadedProducts} key="products" />,
   ]
 }
 

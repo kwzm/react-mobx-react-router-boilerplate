@@ -1,7 +1,7 @@
 export const apiConfig = {
   dev: {
     API_HOST: 'http://localhost',
-    API_PATH: '/api/index.php',
+    API_PATH: '/api',
     API_PORT: '3000',
   },
   prod: {
