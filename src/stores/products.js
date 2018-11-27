@@ -23,10 +23,12 @@ class Products {
     },
   ]
 
-  @action.bound fetchProducts() {
+  @action.bound fetchProducts(filter = {}) {
     this.listLoading = true
     requestApi
-      .get('/products')
+      .get('/products', {
+        ...filter,
+      })
       .then(data => {
         runInAction(() => {
           this.list = data
