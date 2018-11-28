@@ -82,7 +82,7 @@ Products.propTypes = {
 }
 
 Products.wrappedComponent.propTypes = {
-  filter: ObservablePropTypes.observableObject.isRequired,
+  filter: ObservablePropTypes.observableObject,
   fetchProducts: PropTypes.func.isRequired,
 }
 

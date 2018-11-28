@@ -69,7 +69,7 @@ class ProductForm extends React.Component {
                 message: '请输入价格',
               },
             ],
-          })(<InputNumber step={0.01} />)}
+          })(<InputNumber step={0.01} min={0.0} precision={2} />)}
         </FormItem>
         <FormItem label="类别" {...formItemLayout}>
           {getFieldDecorator('category', {

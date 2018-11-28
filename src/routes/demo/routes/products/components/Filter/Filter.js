@@ -61,7 +61,7 @@ class Filter extends React.Component {
           </Col>
           <Col span={8}>
             <FormItem label="价格" {...formItemLayout}>
-              {getFieldDecorator('price')(<InputNumber step={0.01} />)}
+              {getFieldDecorator('price')(<InputNumber min={0.0} precision={2} step={0.01} />)}
             </FormItem>
           </Col>
           <Col span={8}>

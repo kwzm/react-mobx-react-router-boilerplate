@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { inject, observer, PropTypes as ObservablePropTypes } from 'mobx-react'
-import { Table, Button } from 'antd'
+import { Table, Button, Row, Col } from 'antd'
 import { stringifyProductParmas } from '@/utils/common'
 import FormModal from '../FormModal'
 import styles from './List.module.less'
@@ -83,6 +83,14 @@ class List extends React.Component {
         sorter: (a, b) => Number(a.category) - Number(b.category),
       },
       {
+        title: '价格（元）',
+        dataIndex: 'price',
+        sorter: (a, b) => {
+          console.log(a.price)
+          return a.price - b.price
+        },
+      },
+      {
         title: '生产日期',
         dataIndex: 'productionDate',
         sorter: (a, b) => {
@@ -122,6 +130,12 @@ class List extends React.Component {
   render() {
     const { data, listLoading, page, total } = this.props
     const { isOpenModal, currentProduct } = this.state
+    const expandedRowRender = record => (
+      <Row>
+        <Col span={2}>备注：</Col>
+        <Col span={20}>{record.remark}</Col>
+      </Row>
+    )
 
     return (
       <div>
@@ -133,6 +147,7 @@ class List extends React.Component {
           rowKey="id"
           loading={listLoading}
           columns={this.getColumns()}
+          expandedRowRender={expandedRowRender}
           dataSource={data.toJS()}
           pagination={{
             current: page,
