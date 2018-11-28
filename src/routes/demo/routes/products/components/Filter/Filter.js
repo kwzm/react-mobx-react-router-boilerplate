@@ -84,7 +84,7 @@ export default Form.create({
     return {
       name: { value: data.name },
       manufacturer: { value: data.manufacturer },
-      productionDate: { value: moment(data.productionDate) },
+      productionDate: { value: data.productionDate ? moment(data.productionDate) : null },
       price: { value: data.price },
       category: { value: data.category },
     }

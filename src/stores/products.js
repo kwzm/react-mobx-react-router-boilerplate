@@ -43,12 +43,15 @@ class Products {
           this.list = resp.data
           this.page = resp.page
           this.total = resp.total
-          this.listLoading = false
         })
       })
       .catch(err => {
-        this.listLoading = false
-        return err
+        return Promise.reject(err)
+      })
+      .finally(() => {
+        runInAction(() => {
+          this.listLoading = false
+        })
       })
   }
 
@@ -59,12 +62,15 @@ class Products {
       .then(resp => {
         runInAction(() => {
           this.list.unshift(resp)
-          this.formLoading = false
         })
       })
       .catch(err => {
-        this.formLoading = false
-        return err
+        return Promise.reject(err)
+      })
+      .finally(() => {
+        runInAction(() => {
+          this.formLoading = false
+        })
       })
   }
 
@@ -80,12 +86,15 @@ class Products {
             id,
             ...resp,
           }
-          this.formLoading = false
         })
       })
       .catch(err => {
-        this.formLoading = false
-        return err
+        return Promise.reject(err)
+      })
+      .finally(() => {
+        runInAction(() => {
+          this.formLoading = false
+        })
       })
   }
 
@@ -99,7 +108,7 @@ class Products {
         })
       })
       .catch(err => {
-        return err
+        return Promise.reject(err)
       })
       .finally(() => {
         runInAction(() => {
