@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { withRouter } from 'react-router-dom'
 import { inject, observer, PropTypes as ObservablePropTypes } from 'mobx-react'
 import { Table, Button } from 'antd'
+import { stringifyProductParmas } from '@/utils/common'
 import FormModal from '../FormModal'
 import styles from './List.module.less'
 
@@ -13,7 +15,6 @@ import styles from './List.module.less'
   filter: products.filter,
   categories: products.categories,
   listLoading: products.listLoading,
-  fetchProducts: products.fetchProducts,
   removeProduct: products.removeProduct,
 }))
 @observer
@@ -25,12 +26,6 @@ class List extends React.Component {
       isOpenModal: false,
       currentProduct: {},
     }
-  }
-
-  componentDidMount() {
-    const { fetchProducts } = this.props
-
-    fetchProducts()
   }
 
   handleOpenModel = () => {
@@ -56,11 +51,12 @@ class List extends React.Component {
   }
 
   handleTableChange = pagination => {
-    const { page, filter, fetchProducts } = this.props
+    const { history, location, page, filter } = this.props
     const { current } = pagination
+    const params = stringifyProductParmas(filter, { page: current })
 
     if (page !== current) {
-      fetchProducts(filter, { page: current })
+      history.push(`${location.pathname}?${params}`)
     }
   }
 
@@ -154,11 +150,15 @@ List.wrappedComponent.propTypes = {
   data: ObservablePropTypes.observableArray.isRequired,
   page: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  filter: ObservablePropTypes.observableObject.isRequired,
+  filter: ObservablePropTypes.observableObject,
   categories: ObservablePropTypes.observableArray.isRequired,
   listLoading: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
   removeProduct: PropTypes.func.isRequired,
 }
 
-export default List
+List.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+}
+
+export default withRouter(List)

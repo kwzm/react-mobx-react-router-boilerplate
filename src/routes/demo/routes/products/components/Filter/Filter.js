@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { inject, observer, propTypes as ObservablePropTypes } from 'mobx-react'
 import { Form, Row, Col, Input, InputNumber, Select, DatePicker, Button } from 'antd'
 
@@ -79,6 +80,15 @@ Filter.wrappedComponent.propTypes = {
 }
 
 export default Form.create({
+  mapPropsToFields: ({ data = {} }) => {
+    return {
+      name: { value: data.name },
+      manufacturer: { value: data.manufacturer },
+      productionDate: { value: moment(data.productionDate) },
+      price: { value: data.price },
+      category: { value: data.category },
+    }
+  },
   onValuesChange: (props, values) => {
     props.handleSearch(values)
   },

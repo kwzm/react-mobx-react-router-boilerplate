@@ -25,3 +25,4 @@ yarn-error.log*
 *.rej
 .env
 mock
+debug.log

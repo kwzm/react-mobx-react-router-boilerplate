@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from 'mobx'
-import queryString from 'query-string'
 import requestApi from '@/utils/http'
+import { parseProductsParams } from '@/utils/common'
 
 class Products {
   @observable listLoading = false
@@ -30,16 +30,14 @@ class Products {
 
   @observable filter = {}
 
-  @action.bound fetchProducts(filter = {}, pagination = { page: 1 }) {
-    const params = queryString.stringify({
-      filter: JSON.stringify(filter),
-      pagination: JSON.stringify(pagination),
-    })
+  @action.bound fetchProducts(search) {
+    const query = parseProductsParams(search)
+    const { filter } = query
 
     this.filter = filter
     this.listLoading = true
     requestApi
-      .get(`/products?${params}`)
+      .get(`/products${search}`)
       .then(resp => {
         runInAction(() => {
           this.list = resp.data
