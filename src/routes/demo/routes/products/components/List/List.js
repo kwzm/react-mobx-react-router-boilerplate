@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { inject, observer, PropTypes as ObservablePropTypes } from 'mobx-react'
-import { Table, Button, Row, Col } from 'antd'
+import { Table, Button, Row, Col, Popconfirm, message } from 'antd'
 import { stringifyProductParmas } from '@/utils/common'
 import FormModal from '../FormModal'
 import styles from './List.module.less'
@@ -47,7 +47,14 @@ class List extends React.Component {
   }
 
   handleRemove = data => {
-    this.props.removeProduct(data)
+    this.props
+      .removeProduct(data)
+      .then(() => {
+        message.success('删除成功')
+      })
+      .catch(err => {
+        message.error(err)
+      })
   }
 
   handleTableChange = pagination => {
@@ -117,9 +124,12 @@ class List extends React.Component {
               <Button className={styles.edit} onClick={() => this.handleEdit(record)}>
                 编辑
               </Button>
-              <Button type="danger" onClick={() => this.handleRemove(record)}>
-                删除
-              </Button>
+              <Popconfirm
+                title="你是否确定要删除这条数据？"
+                onConfirm={() => this.handleRemove(record)}
+              >
+                <Button type="danger">删除</Button>
+              </Popconfirm>
             </div>
           )
         },

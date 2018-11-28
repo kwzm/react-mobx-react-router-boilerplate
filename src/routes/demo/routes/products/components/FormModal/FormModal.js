@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import { Modal } from 'antd'
+import { Modal, message } from 'antd'
 import ProductForm from '../ProductForm'
 
 @inject(({ products }) => ({
@@ -17,25 +17,47 @@ class FormModal extends React.Component {
     this.formRef = React.createRef()
   }
 
-  handleOk = () => {
+  postData = values => {
     const { addProduct, editProduct, onClose, data } = this.props
+    const postData = {
+      ...values,
+      productionDate: values.productionDate.format('YYYY-MM-DD'),
+    }
 
+    if (this.isEdit()) {
+      editProduct(data.id, postData)
+        .then(() => {
+          message.success('编辑成功')
+        })
+        .catch(err => {
+          message.error(err)
+        })
+        .finally(() => {
+          onClose()
+        })
+    } else {
+      addProduct(postData)
+        .then(() => {
+          message.success('创建成功')
+        })
+        .catch(err => {
+          message.error(err)
+        })
+        .finally(() => {
+          onClose()
+        })
+    }
+  }
+
+  handleOk = () => {
     this.formRef.current.validateFields((err, values) => {
       if (!err) {
-        const postData = {
-          ...values,
-          productionDate: values.productionDate.format('YYYY-MM-DD'),
-        }
-
-        if (this.isEdit()) {
-          editProduct(data.id, postData).finally(() => {
-            onClose()
-          })
-        } else {
-          addProduct(postData).finally(() => {
-            onClose()
-          })
-        }
+        Modal.confirm({
+          title: '你确定要提交吗？',
+          onOk: () => {
+            this.postData(values)
+          },
+        })
       }
     })
   }
