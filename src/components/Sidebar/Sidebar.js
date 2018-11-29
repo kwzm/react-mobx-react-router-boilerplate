@@ -16,7 +16,7 @@ class Sidebar extends React.Component {
 
     this.state = {
       openKeys: [],
-      rootSubmenuKeys: props.navData.filter(item => !!item.children).map(item => item.url),
+      rootSubmenuKeys: props.navData.filter((item) => !!item.children).map((item) => item.url),
     }
   }
 
@@ -41,18 +41,17 @@ class Sidebar extends React.Component {
     }
   }
 
-  renderSubMenu = item => {
+  renderSubMenu = (item) => {
+    const title = (
+      <span>
+        <Icon type={item.icon} />
+        <span>{item.text}</span>
+      </span>
+    )
+
     return (
-      <SubMenu
-        key={item.url}
-        title={
-          <span>
-            <Icon type={item.icon} />
-            <span>{item.text}</span>
-          </span>
-        }
-      >
-        {item.children.map(child => (
+      <SubMenu key={item.url} title={title}>
+        {item.children.map((child) => (
           <Menu.Item key={child.url}>
             <Link to={child.url}>
               <Icon type={child.icon} />
@@ -64,22 +63,22 @@ class Sidebar extends React.Component {
     )
   }
 
-  setOpenKeys = pathname => {
+  setOpenKeys = (pathname) => {
     const { rootSubmenuKeys } = this.state
-    const openKeys = rootSubmenuKeys.filter(item => pathname.indexOf(item) > -1)
+    const openKeys = rootSubmenuKeys.filter((item) => pathname.indexOf(item) > -1)
 
     this.setState({
       openKeys,
     })
   }
 
-  handleOpenChange = keys => {
+  handleOpenChange = (keys) => {
     if (keys.length === 0) {
       return this.setState({ openKeys: [] })
     }
 
     const { openKeys, rootSubmenuKeys } = this.state
-    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1)
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
 
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       return this.setState({ openKeys })
@@ -107,7 +106,7 @@ class Sidebar extends React.Component {
         openKeys={collapsed ? [] : openKeys}
         onOpenChange={this.handleOpenChange}
       >
-        {navData.map(item => {
+        {navData.map((item) => {
           if (item.children) {
             return this.renderSubMenu(item)
           }
