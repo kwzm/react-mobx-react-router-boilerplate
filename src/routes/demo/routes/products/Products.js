@@ -8,6 +8,7 @@ import Filter from './components/Filter'
 
 @inject(({ products }) => ({
   filter: products.filter,
+  pagination: products.pagination,
   fetchProducts: products.fetchProducts,
 }))
 @observer
@@ -42,7 +43,7 @@ class Products extends React.Component {
   }
 
   handleSearch = (value = {}) => {
-    const { history, location } = this.props
+    const { history, location, pagination } = this.props
     const values = {
       ...this.filterRef.current.getFieldsValue(),
       ...value,
@@ -59,7 +60,7 @@ class Products extends React.Component {
       }
     })
 
-    const params = stringifyProductParmas(filter)
+    const params = stringifyProductParmas(filter, pagination)
 
     history.push(`${location.pathname}?${params}`)
   }
@@ -83,6 +84,7 @@ Products.propTypes = {
 
 Products.wrappedComponent.propTypes = {
   filter: ObservablePropTypes.observableObject,
+  pagination: ObservablePropTypes.observableObject.isRequired,
   fetchProducts: PropTypes.func.isRequired,
 }
 

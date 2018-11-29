@@ -5,14 +5,14 @@ import { withRouter } from 'react-router-dom'
 import { inject, observer, PropTypes as ObservablePropTypes } from 'mobx-react'
 import { Table, Button, Row, Col, Popconfirm, message } from 'antd'
 import { stringifyProductParmas } from '@/utils/common'
+import { DEFAULT_PAGE_SIZE, PAGE_SIZE_OPTIONS } from '@/config/config'
 import FormModal from '../FormModal'
 import styles from './List.module.less'
 
 @inject(({ products }) => ({
   data: products.list,
-  page: products.page,
-  total: products.total,
   filter: products.filter,
+  pagination: products.pagination,
   categories: products.categories,
   listLoading: products.listLoading,
   removeProduct: products.removeProduct,
@@ -57,14 +57,24 @@ class List extends React.Component {
       })
   }
 
-  handleTableChange = pagination => {
-    const { history, location, page, filter } = this.props
-    const { current } = pagination
-    const params = stringifyProductParmas(filter, { page: current })
+  handlePageChange = current => {
+    const { history, location, pagination, filter } = this.props
+    const params = stringifyProductParmas(filter, {
+      ...pagination,
+      page: current,
+    })
 
-    if (page !== current) {
-      history.push(`${location.pathname}?${params}`)
-    }
+    history.push(`${location.pathname}?${params}`)
+  }
+
+  handlePageSizeChange = (current, size) => {
+    const { history, location, pagination, filter } = this.props
+    const params = stringifyProductParmas(filter, {
+      ...pagination,
+      pageSize: size,
+    })
+
+    history.push(`${location.pathname}?${params}`)
   }
 
   getColumns = () => {
@@ -92,10 +102,7 @@ class List extends React.Component {
       {
         title: '价格（元）',
         dataIndex: 'price',
-        sorter: (a, b) => {
-          console.log(a.price)
-          return a.price - b.price
-        },
+        sorter: (a, b) => a.price - b.price,
       },
       {
         title: '生产日期',
@@ -138,7 +145,11 @@ class List extends React.Component {
   }
 
   render() {
-    const { data, listLoading, page, total } = this.props
+    const {
+      data,
+      listLoading,
+      pagination: { page, total },
+    } = this.props
     const { isOpenModal, currentProduct } = this.state
     const expandedRowRender = record => (
       <Row>
@@ -162,8 +173,14 @@ class List extends React.Component {
           pagination={{
             current: page,
             total,
+            defaultPageSize: DEFAULT_PAGE_SIZE,
+            pageSizeOptions: PAGE_SIZE_OPTIONS,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: (totalNum, range) => `第${range[0]}-${range[1]}条 总数${totalNum}条`,
+            onChange: this.handlePageChange,
+            onShowSizeChange: this.handlePageSizeChange,
           }}
-          onChange={this.handleTableChange}
         />
         <FormModal data={currentProduct} visible={isOpenModal} onClose={this.handleCloseModel} />
       </div>
@@ -173,9 +190,8 @@ class List extends React.Component {
 
 List.wrappedComponent.propTypes = {
   data: ObservablePropTypes.observableArray.isRequired,
-  page: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
   filter: ObservablePropTypes.observableObject,
+  pagination: ObservablePropTypes.observableObject.isRequired,
   categories: ObservablePropTypes.observableArray.isRequired,
   listLoading: PropTypes.bool.isRequired,
   removeProduct: PropTypes.func.isRequired,

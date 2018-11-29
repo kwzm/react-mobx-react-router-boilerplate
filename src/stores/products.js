@@ -1,6 +1,7 @@
 import { observable, action, runInAction } from 'mobx'
 import requestApi from '@/utils/http'
 import { parseProductsParams } from '@/utils/common'
+import { DEFAULT_PAGE_SIZE } from '@/config/config'
 
 class Products {
   @observable listLoading = false
@@ -24,11 +25,13 @@ class Products {
     },
   ]
 
-  @observable page = 1
-
-  @observable total = 0
-
   @observable filter = {}
+
+  @observable pagination = {
+    page: 1,
+    pageSize: DEFAULT_PAGE_SIZE,
+    total: 0,
+  }
 
   @action.bound fetchProducts(search) {
     const query = parseProductsParams(search)
@@ -41,8 +44,9 @@ class Products {
       .then(resp => {
         runInAction(() => {
           this.list = resp.data
-          this.page = resp.page
-          this.total = resp.total
+          this.pagination.page = resp.page
+          this.pagination.total = resp.total
+          this.pagination.pageSize = resp.pageSize
         })
       })
       .catch(err => {
