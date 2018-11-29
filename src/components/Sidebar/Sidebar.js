@@ -25,27 +25,32 @@ class Sidebar extends React.Component {
       location: { pathname },
     } = this.props
 
-    this.getOpenKeys(pathname)
+    this.setOpenKeys(pathname)
   }
 
   componentWillReceiveProps(nextProps) {
     const {
-      location: { pathname },
+      location: { pathname: nextPathname },
     } = nextProps
+    const {
+      location: { pathname },
+    } = this.props
 
-    this.getOpenKeys(pathname)
+    if (nextPathname !== pathname) {
+      this.setOpenKeys(pathname)
+    }
   }
 
   renderSubMenu = item => {
     return (
       <SubMenu
         key={item.url}
-        title={(
+        title={
           <span>
             <Icon type={item.icon} />
             <span>{item.text}</span>
           </span>
-)}
+        }
       >
         {item.children.map(child => (
           <Menu.Item key={child.url}>
@@ -59,7 +64,7 @@ class Sidebar extends React.Component {
     )
   }
 
-  getOpenKeys = pathname => {
+  setOpenKeys = pathname => {
     const { rootSubmenuKeys } = this.state
     const openKeys = rootSubmenuKeys.filter(item => pathname.indexOf(item) > -1)
 
@@ -99,7 +104,7 @@ class Sidebar extends React.Component {
         mode="inline"
         inlineCollapsed={collapsed}
         selectedKeys={[pathname]}
-        openKeys={openKeys}
+        openKeys={collapsed ? [] : openKeys}
         onOpenChange={this.handleOpenChange}
       >
         {navData.map(item => {
