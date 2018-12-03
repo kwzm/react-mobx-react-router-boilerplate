@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { observer, inject, PropTypes as ObservablePropTypes } from 'mobx-react'
 
-@inject(({ demo }) => ({
-  todos: demo.todos,
+@inject(({ todos }) => ({
+  todos: todos.todos,
 }))
 @observer
 class TodoDetail extends React.Component {
@@ -14,7 +14,7 @@ class TodoDetail extends React.Component {
   getTodo = () => {
     const { match, todos } = this.props
 
-    return todos.find(item => `${item.id}` === match.params.id)
+    return todos.find((item) => `${item.id}` === match.params.id)
   }
 
   render() {

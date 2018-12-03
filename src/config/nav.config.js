@@ -1,6 +1,6 @@
 const NavConfig = [
   {
-    text: '首页',
+    text: 'home',
     icon: 'home',
     url: '/home',
   }, {
@@ -12,6 +12,10 @@ const NavConfig = [
         text: 'todo',
         icon: 'bars',
         url: '/demo/todo'
+      }, {
+        text: 'products',
+        icon: 'bars',
+        url: '/demo/products'
       }
     ]
   },

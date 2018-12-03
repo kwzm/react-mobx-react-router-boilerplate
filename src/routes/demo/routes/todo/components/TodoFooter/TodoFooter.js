@@ -6,14 +6,14 @@ import styles from './TodoFooter.module.less'
 
 const actions = ['All', 'Active', 'Completed']
 
-@inject(({ demo }) => ({
-  left: demo.left,
-  filter: demo.filter,
-  filterTodos: demo.filterTodos,
+@inject(({ todos }) => ({
+  left: todos.left,
+  filter: todos.filter,
+  filterTodos: todos.filterTodos,
 }))
 @observer
 class TodoFooter extends React.Component {
-  handleChange = e => {
+  handleChange = (e) => {
     const { value } = e.target
     const { filterTodos } = this.props
 
@@ -27,7 +27,7 @@ class TodoFooter extends React.Component {
       <footer className={styles.todoFooter}>
         <span className={styles.left}>{left} item(s) left</span>
         <Radio.Group value={filter} onChange={this.handleChange}>
-          {actions.map(action => (
+          {actions.map((action) => (
             <Radio.Button key={action} value={action} className={styles.action}>
               {action}
             </Radio.Button>

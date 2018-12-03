@@ -4,8 +4,8 @@ import { Input } from 'antd'
 import { observer, inject } from 'mobx-react'
 import styles from './TodoHeader.module.less'
 
-@inject(({ demo }) => ({
-  createTodo: demo.createTodo,
+@inject(({ todos }) => ({
+  createTodo: todos.createTodo,
 }))
 @observer
 class TodoHeader extends React.Component {
@@ -13,11 +13,11 @@ class TodoHeader extends React.Component {
     value: '',
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ value: e.target.value })
   }
 
-  handleEnter = e => {
+  handleEnter = (e) => {
     const { createTodo } = this.props
     const { value } = e.target
 
