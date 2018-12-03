@@ -6,8 +6,8 @@ import { observer, PropTypes as ObservablePropTypes, inject } from 'mobx-react'
 import { Checkbox, Icon } from 'antd'
 import styles from './TodoItem.module.less'
 
-@inject(({ demo }) => ({
-  removeTodo: demo.removeTodo,
+@inject(({ todos }) => ({
+  removeTodo: todos.removeTodo,
 }))
 @observer
 class TodoItem extends React.Component {

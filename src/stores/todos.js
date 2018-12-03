@@ -16,7 +16,7 @@ class Todo {
   }
 }
 
-class Demo {
+class Todos {
   @observable todos = []
 
   @observable filter = 'All'
@@ -34,15 +34,15 @@ class Demo {
   }
 
   @computed get left() {
-    return this.todos.filter(todo => !todo.isFinished).length
+    return this.todos.filter((todo) => !todo.isFinished).length
   }
 
   @computed get filteredTodos() {
     switch (this.filter) {
       case 'Active':
-        return observable(this.todos.filter(todo => !todo.isFinished))
+        return observable(this.todos.filter((todo) => !todo.isFinished))
       case 'Completed':
-        return observable(this.todos.filter(todo => todo.isFinished))
+        return observable(this.todos.filter((todo) => todo.isFinished))
       case 'All':
         return this.todos
       default:
@@ -51,4 +51,4 @@ class Demo {
   }
 }
 
-export default Demo
+export default Todos

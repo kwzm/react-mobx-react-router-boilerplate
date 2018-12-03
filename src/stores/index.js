@@ -1,6 +1,6 @@
 import { configure } from 'mobx'
-import Demo from './demo'
 import Common from './common'
+import Todos from './todos'
 import Products from './products'
 
 configure({
@@ -8,7 +8,7 @@ configure({
 })
 
 export default {
-  demo: new Demo(),
   common: new Common(),
+  todos: new Todos(),
   products: new Products(),
 }

@@ -1,6 +1,6 @@
 const NavConfig = [
   {
-    text: '首页',
+    text: 'home',
     icon: 'home',
     url: '/home',
   }, {

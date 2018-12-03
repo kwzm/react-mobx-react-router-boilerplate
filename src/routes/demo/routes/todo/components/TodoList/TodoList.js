@@ -3,8 +3,8 @@ import { observer, inject, PropTypes } from 'mobx-react'
 import TodoItem from '../TodoItem'
 import styles from './TodoList.module.less'
 
-@inject(({ demo }) => ({
-  data: demo.filteredTodos,
+@inject(({ todos }) => ({
+  data: todos.filteredTodos,
 }))
 @observer
 class TodoList extends React.Component {
@@ -14,7 +14,7 @@ class TodoList extends React.Component {
     return (
       <ul className={styles.todoList}>
         {data.length > 0 ? (
-          data.map(item => <TodoItem key={item.id} todo={item} />)
+          data.map((item) => <TodoItem key={item.id} todo={item} />)
         ) : (
           <div className={styles.noData}> no data </div>
         )}
