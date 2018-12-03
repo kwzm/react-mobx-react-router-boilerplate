@@ -31,13 +31,25 @@ class Sidebar extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {
       location: { pathname: nextPathname },
+      collapsed: nextCollapsed,
     } = nextProps
     const {
       location: { pathname },
+      collapsed,
     } = this.props
 
-    if (nextPathname !== pathname) {
-      this.setOpenKeys(pathname)
+    // 当缩起菜单时不展开SubMenu
+    if (nextCollapsed && nextCollapsed !== collapsed) {
+      return this.setState({ openKeys: [] })
+    }
+
+    // 当展开菜单时展开SubMenu
+    if (!nextCollapsed && nextCollapsed !== collapsed) {
+      return this.setOpenKeys(nextPathname)
+    }
+
+    if (nextPathname !== pathname && !nextCollapsed) {
+      return this.setOpenKeys(nextPathname)
     }
   }
 
@@ -103,7 +115,7 @@ class Sidebar extends React.Component {
         mode="inline"
         inlineCollapsed={collapsed}
         selectedKeys={[pathname]}
-        openKeys={collapsed ? [] : openKeys}
+        openKeys={openKeys}
         onOpenChange={this.handleOpenChange}
       >
         {navData.map((item) => {
