@@ -2,18 +2,24 @@
 
 A simple boilerplate based on create-react-app but add mobx, react-router, stylelint and so on.
 
+Provide two demos help you quick start.
+
 ## Preview
 
 ### Home view
-![homeView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/public/preview/homeView.PNG)
+![homeView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/preview/homeView.PNG)
 
-### Demo view
-![demoView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/public/preview/demoView.PNG)
+### Todos demo view
+![todosView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/preview/todosView.PNG)
+
+### A products CRUD Demo view
+![productsView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/preview/productsView.PNG)
 
 ## Features
 
 - All features in create-react-app except test
 - HMR
+- Mock support(use mockjs)
 - Support less
 - Use eslint-config-airbnb instead of eslint-config-react-app
 - lint code in pre-commit by husky
@@ -69,6 +75,7 @@ my-app
     │   ├── 404
     │   ├── demo 
     |   │   ├── routes (second level routes)
+    |   |   |   ├── products
     |   |   |   ├── todo
     |   |   |   └── todoDetail 
     |   │   ├── Demo.js
@@ -99,3 +106,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm run build` or `yarn build`
 
 Builds the app for production to the `build` folder.<br>
+
+## Note
+
+- IE9~IE10 don't support dev enviroment.
