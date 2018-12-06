@@ -19,7 +19,7 @@ Provide two demos help you quick start.
 
 - All features in create-react-app except test
 - HMR
-- Mock support(use mockjs)
+- Mock support(use [mockjs](https://github.com/nuysoft/Mock))
 - Support less
 - Use eslint-config-airbnb instead of eslint-config-react-app
 - lint code in pre-commit by husky
