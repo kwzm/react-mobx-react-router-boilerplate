@@ -46,7 +46,7 @@ Provide two demos help you quick start.
 - react-router@4
 - ant-design@2
 
-## Directory structore
+## Directory structure
 ```
 my-app
 ├── README.md
