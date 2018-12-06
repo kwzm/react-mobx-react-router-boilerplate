@@ -17,7 +17,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-
+const theme = require('../theme.json')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -332,6 +332,8 @@ module.exports = {
               'less-loader',
               {
                 javascriptEnabled: true,
+                sourceMap: true,
+                modifyVars: theme,
               }),
           },
           {
@@ -345,6 +347,8 @@ module.exports = {
               'less-loader',
               {
                 javascriptEnabled: true,
+                sourceMap: true,
+                modifyVars: theme,
               }
             ),
           },
