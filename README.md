@@ -26,7 +26,7 @@ Provide two demos help you quick start.
 - HMR
 - Mock support(use [mockjs](https://github.com/nuysoft/Mock))
 - Use eslint-config-airbnb instead of eslint-config-react-app
-- lint code in pre-commit by husky
+- lint code in pre-commit by husky and lint-staged
   - prettier
   - eslint
   - stylelint
@@ -117,7 +117,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Runs the app in development mode without mock data.
 
-### `npm run build` or `yarn build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
 
