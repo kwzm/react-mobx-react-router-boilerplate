@@ -16,28 +16,38 @@ Provide two demos help you quick start.
 ![productsView](https://github.com/kwzm/react-mobx-react-router-boilerplate/blob/master/preview/productsView.PNG)
 
 ## Features
-
+### Router
+- Add react-router use hash router
+### Data storage
+- Mobx
+- Mobx-react
+### Engineering
 - All features in create-react-app except test
 - HMR
 - Mock support(use [mockjs](https://github.com/nuysoft/Mock))
-- Support less
 - Use eslint-config-airbnb instead of eslint-config-react-app
 - lint code in pre-commit by husky
   - prettier
   - eslint
   - stylelint
 - Add .editorconfig
-- You can import folders in src directly instead of relative paths like `import SomeComponent from 'Components/SomeComponent'`
+- You can import folders in src directly instead of relative paths like `import SomeComponent from '@/Components/SomeComponent'`
 - Code spliting by react-loadable
+- Drop console when build
+### Style
+- Support less
+- Add [reset css](https://github.com/jgthms/minireset.css)
+### Syntax
 - Support decorators
+### UI
 - Use antd as UI library
 - Use antd import on demand
 - Add basic layout
 - Add exception component to handle 403, 404, 500 error(copy antd-pro)
-- Add [reset css](https://github.com/jgthms/minireset.css)
-- Drop console when build
+### Compatibility
 - Add isIe9 utility function
-- Add todo demo help you quick start
+### Demo
+- Add two demos help you quick start
 
 ## Stack
 - creat-react-app@2.1.1
@@ -65,7 +75,7 @@ my-app
 │   ├── index.html
 │   └── manifest.json
 ├── config (webpack config)
-├── scripts    
+├── scripts
 └── src
     ├── assets (global assets)
     ├── components (global components)
@@ -73,11 +83,11 @@ my-app
     ├── layouts (global layouts)
     ├── routes (first level routes)
     │   ├── 404
-    │   ├── demo 
+    │   ├── demo
     |   │   ├── routes (second level routes)
     |   |   |   ├── products
     |   |   |   ├── todo
-    |   |   |   └── todoDetail 
+    |   |   |   └── todoDetail
     |   │   ├── Demo.js
     |   │   └── index.js
     │   └── home
@@ -91,7 +101,7 @@ my-app
 ## Browser support
   - IE9+
   - Modern browsers
-  
+
 ## Getting started
 
 ### Installation
@@ -100,8 +110,12 @@ my-app
 
 ### `npm start`
 
-Runs the app in development mode.
+Runs the app in development mode with mock data.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### `npm run start:no-mock`
+
+Runs the app in development mode without mock data.
 
 ### `npm run build` or `yarn build`
 
