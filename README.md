@@ -43,7 +43,7 @@ Provide two demos help you quick start.
 - Use antd as UI library
 - Use antd import on demand
 - Add basic layout
-- Add exception component to handle 403, 404, 500 error(copy antd-pro)
+- Add exception component to handle 403, 404, 500 error(copy [ant-design-pro](https://github.com/ant-design/ant-design-pro))
 ### Compatibility
 - Add isIe9 utility function
 ### Demo
