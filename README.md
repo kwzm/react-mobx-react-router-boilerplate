@@ -1,6 +1,6 @@
 # React-Mobx-React-router-Boilerplate
 
-A simple boilerplate based on create-react-app but add mobx, react-router, stylelint and so on.
+A simple boilerplate based on [create-react-app](https://github.com/facebook/create-react-app) but add mobx, react-router, stylelint and so on.
 
 Provide two demos help you quick start.
 
