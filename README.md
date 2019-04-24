@@ -23,7 +23,7 @@ Provide two demos help you quick start.
 - Mobx-react
 ### Engineering
 - All features in create-react-app
-- HMR
+- HMR for react
 - Mock support(use [mockjs](https://github.com/nuysoft/Mock))
 - Use eslint-config-airbnb instead of eslint-config-react-app
 - lint code in pre-commit by husky and lint-staged
