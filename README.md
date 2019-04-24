@@ -22,7 +22,7 @@ Provide two demos help you quick start.
 - Mobx
 - Mobx-react
 ### Engineering
-- All features in create-react-app except test
+- All features in create-react-app
 - HMR
 - Mock support(use [mockjs](https://github.com/nuysoft/Mock))
 - Use eslint-config-airbnb instead of eslint-config-react-app
