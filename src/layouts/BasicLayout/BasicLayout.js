@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { Switch } from 'react-router-dom'
 import classNames from 'classnames'
+import DevTools from 'mobx-react-devtools'
 import Sidebar from '@/components/Sidebar'
 import Header from '@/components/Header'
 import styles from './BasicLayout.module.less'
@@ -34,6 +35,7 @@ class BasicLayout extends React.Component {
             </div>
           </article>
         </section>
+        <DevTools />
       </div>
     )
   }
