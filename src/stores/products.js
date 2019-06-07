@@ -1,7 +1,7 @@
 import { observable, action, runInAction } from 'mobx'
-import requestApi from '@/utils/http'
 import { parseProductsParams } from '@/utils/common'
 import { DEFAULT_PAGE_SIZE } from '@/config/config'
+import { queryProducts, createProduct, updateProduct, deleteProduct } from '@/services/products'
 
 class Products {
   @observable listLoading = false
@@ -39,9 +39,8 @@ class Products {
 
     this.filter = filter
     this.listLoading = true
-    requestApi
-      .get(`/products${search}`)
-      .then(resp => {
+    return queryProducts(search)
+      .then((resp) => {
         runInAction(() => {
           this.list = resp.data
           this.pagination.page = resp.page
@@ -49,7 +48,7 @@ class Products {
           this.pagination.pageSize = resp.pageSize
         })
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err)
       })
       .finally(() => {
@@ -61,14 +60,13 @@ class Products {
 
   @action.bound addProduct(data) {
     this.formLoading = true
-    return requestApi
-      .post('/product', null, data)
-      .then(resp => {
+    return createProduct(data)
+      .then((resp) => {
         runInAction(() => {
           this.list.unshift(resp)
         })
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err)
       })
       .finally(() => {
@@ -80,11 +78,10 @@ class Products {
 
   @action.bound editProduct(id, data) {
     this.formLoading = true
-    return requestApi
-      .put('/product', { id }, data)
-      .then(resp => {
+    return updateProduct(id, data)
+      .then((resp) => {
         runInAction(() => {
-          const index = this.list.findIndex(item => item.id === id)
+          const index = this.list.findIndex((item) => item.id === id)
 
           this.list[index] = {
             id,
@@ -92,7 +89,7 @@ class Products {
           }
         })
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err)
       })
       .finally(() => {
@@ -104,14 +101,13 @@ class Products {
 
   @action.bound removeProduct(value) {
     this.listLoading = true
-    return requestApi
-      .delete('/product', { id: value.id })
+    return deleteProduct(value.id)
       .then(() => {
         runInAction(() => {
           this.list.remove(value)
         })
       })
-      .catch(err => {
+      .catch((err) => {
         return Promise.reject(err)
       })
       .finally(() => {
