@@ -48,6 +48,10 @@ Provide two demos help you quick start.
 - Add isIe9 utility function
 ### Demo
 - Add two demos help you quick start
+### Git commit
+- Use commitizen to format your commit message
+- Use commitlint to lint your commit message
+- Use conventional-changelog-cli to generate CHANGELOG.md
 
 ## Stack
 - creat-react-app@2.1.1
